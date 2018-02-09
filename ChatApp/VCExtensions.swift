@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
-    
+extension UIViewController {    
     
     //Show alert for validation of signUp and signIn process
     func showAlert(withTitle title: String, message: String) {
