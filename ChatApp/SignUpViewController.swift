@@ -18,19 +18,29 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton! {
+        didSet {
+            signUpButton.addTarget(self, action: #selector(signUpUser), for: .touchUpInside)
+        }
+    }
     
     var ref : DatabaseReference!
+    
+    var logoutChecker : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
+        
+        if logoutChecker == true {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     
     
     //Function to Sign Up New User
-    func signUpUser() {
+    @objc func signUpUser() {
         guard let username = usernameTextField.text,
         let email = emailTextField.text,
         let password = passwordTextField.text,
@@ -56,7 +66,13 @@ class SignUpViewController: UIViewController {
                 
                 //Successful Creation of New User
                 if let validUser = user {
-                    //let 
+                    let newUser : [String : Any] = ["email" : email, "username" : username]
+                    
+                    self.ref.child("users").child(validUser.uid).setValue(newUser)
+                    
+                    guard let navVC = self.storyboard?.instantiateViewController(withIdentifier: "ContactsViewController") as? ContactsViewController else {return}
+                    
+                    self.present(navVC, animated: true, completion: nil)
                 }
                 
                 
