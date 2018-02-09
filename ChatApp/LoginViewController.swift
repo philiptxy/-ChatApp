@@ -26,10 +26,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         //skip login page if user is already logged in
-        if Auth.auth().currentUser != nil {
-            guard let vc = storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
-            present(vc, animated: true, completion: nil)
-        }
+//        if Auth.auth().currentUser != nil {
+//            guard let vc = storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
+//            present(vc, animated: true, completion: nil)
+//        }
         
     }
 

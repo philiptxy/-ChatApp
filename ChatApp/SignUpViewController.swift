@@ -70,7 +70,9 @@ class SignUpViewController: UIViewController {
                     
                     self.ref.child("users").child(validUser.uid).setValue(newUser)
                     
-                    guard let navVC = self.storyboard?.instantiateViewController(withIdentifier: "ContactsViewController") as? ContactsViewController else {return}
+                    guard let navVC = self.storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
+                    
+                    self.navigationController?.popViewController(animated: false)
                     
                     self.present(navVC, animated: true, completion: nil)
                 }
