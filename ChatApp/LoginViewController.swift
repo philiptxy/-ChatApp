@@ -7,23 +7,62 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
-    @IBOutlet weak var usernameTextField: UITextField!
+
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signInButton: UIButton! {
+        didSet {
+            signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var signUpButton: UIButton! 
+        
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //skip login page if user is already logged in
+        if Auth.auth().currentUser != nil {
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
+            present(vc, animated: true, completion: nil)
+        }
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @objc func signInButtonTapped() {
+        
+        guard let email = emailTextField.text,
+            let password = passwordTextField.text else {return}
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let validError = error {
+                //showError
+                print("ERROR")
+            }
+            if user != nil {
+                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
+                
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
     }
+    
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
 

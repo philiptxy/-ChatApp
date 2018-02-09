@@ -88,7 +88,6 @@
 			children = (
 				FCE937DB202C40C60074DF37 /* AppDelegate.swift */,
 				FCE937DD202C40C60074DF37 /* LoginViewController.swift */,
-				FCE937DF202C40C60074DF37 /* Main.storyboard */,
 				FCE937F3202D98550074DF37 /* ContactsViewController.swift */,
 				FCE937F5202D98640074DF37 /* ChatViewController.swift */,
 				FCE937E2202C40C60074DF37 /* Assets.xcassets */,
@@ -96,6 +95,7 @@
 				FCE937E7202C40C60074DF37 /* Info.plist */,
 				00101A2B202C52FC00821295 /* SignUpViewController.swift */,
 				00A61E9B202D40B60096E27C /* GoogleService-Info.plist */,
+				FCE937DF202C40C60074DF37 /* Main.storyboard */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
