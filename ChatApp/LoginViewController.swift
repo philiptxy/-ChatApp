@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
+    
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -28,7 +29,9 @@ class LoginViewController: UIViewController {
         //skip login page if user is already logged in
         if Auth.auth().currentUser != nil {
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
+            
             present(vc, animated: true, completion: nil)
+           
         }
         
     }
@@ -50,12 +53,11 @@ class LoginViewController: UIViewController {
             }
         }
     }
+
     
 
 
 }
-
-
 
 
 
