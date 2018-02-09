@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00101A2C202C52FC00821295 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00101A2B202C52FC00821295 /* SignUpViewController.swift */; };
+		00671EB5202D9D6F00C36A21 /* VCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00671EB4202D9D6F00C36A21 /* VCExtensions.swift */; };
 		00A61E9C202D40B70096E27C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A61E9B202D40B60096E27C /* GoogleService-Info.plist */; };
 		0B02534C5A5A145F899A5C85 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347BC56EBD0081FD2251C0E1 /* Pods_ChatApp.framework */; };
 		FCE937DC202C40C60074DF37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE937DB202C40C60074DF37 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		00101A2B202C52FC00821295 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		00671EB4202D9D6F00C36A21 /* VCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtensions.swift; sourceTree = "<group>"; };
 		00A61E9B202D40B60096E27C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22D409466F9B4C90BDD30C0F /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		347BC56EBD0081FD2251C0E1 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 				FCE937E4202C40C60074DF37 /* LaunchScreen.storyboard */,
 				FCE937E7202C40C60074DF37 /* Info.plist */,
 				00101A2B202C52FC00821295 /* SignUpViewController.swift */,
+				00671EB4202D9D6F00C36A21 /* VCExtensions.swift */,
 				00A61E9B202D40B60096E27C /* GoogleService-Info.plist */,
 				FCE937DF202C40C60074DF37 /* Main.storyboard */,
 			);
@@ -238,6 +241,7 @@
 			files = (
 				00101A2C202C52FC00821295 /* SignUpViewController.swift in Sources */,
 				FCE937F4202D98550074DF37 /* ContactsViewController.swift in Sources */,
+				00671EB5202D9D6F00C36A21 /* VCExtensions.swift in Sources */,
 				FCE937DE202C40C60074DF37 /* LoginViewController.swift in Sources */,
 				FCE937F6202D98640074DF37 /* ChatViewController.swift in Sources */,
 				FCE937DC202C40C60074DF37 /* AppDelegate.swift in Sources */,
