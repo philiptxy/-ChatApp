@@ -15,6 +15,8 @@
 		FCE937E1202C40C60074DF37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE937DF202C40C60074DF37 /* Main.storyboard */; };
 		FCE937E3202C40C60074DF37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCE937E2202C40C60074DF37 /* Assets.xcassets */; };
 		FCE937E6202C40C60074DF37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE937E4202C40C60074DF37 /* LaunchScreen.storyboard */; };
+		FCE937F4202D98550074DF37 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE937F3202D98550074DF37 /* ContactsViewController.swift */; };
+		FCE937F6202D98640074DF37 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE937F5202D98640074DF37 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		FCE937E2202C40C60074DF37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCE937E5202C40C60074DF37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCE937E7202C40C60074DF37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCE937F3202D98550074DF37 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		FCE937F5202D98640074DF37 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,8 @@
 				FCE937DB202C40C60074DF37 /* AppDelegate.swift */,
 				FCE937DD202C40C60074DF37 /* LoginViewController.swift */,
 				FCE937DF202C40C60074DF37 /* Main.storyboard */,
+				FCE937F3202D98550074DF37 /* ContactsViewController.swift */,
+				FCE937F5202D98640074DF37 /* ChatViewController.swift */,
 				FCE937E2202C40C60074DF37 /* Assets.xcassets */,
 				FCE937E4202C40C60074DF37 /* LaunchScreen.storyboard */,
 				FCE937E7202C40C60074DF37 /* Info.plist */,
@@ -231,7 +237,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				00101A2C202C52FC00821295 /* SignUpViewController.swift in Sources */,
+				FCE937F4202D98550074DF37 /* ContactsViewController.swift in Sources */,
 				FCE937DE202C40C60074DF37 /* LoginViewController.swift in Sources */,
+				FCE937F6202D98640074DF37 /* ChatViewController.swift in Sources */,
 				FCE937DC202C40C60074DF37 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

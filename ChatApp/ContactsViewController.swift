@@ -1,20 +1,17 @@
 //
-//  SignUpViewController.swift
+//  ContactsViewController.swift
 //  ChatApp
 //
-//  Created by Terence Chua on 08/02/2018.
+//  Created by Philip Teow on 09/02/2018.
 //  Copyright © 2018 Philip Teow. All rights reserved.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController {
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+class ContactsViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var logOutButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
