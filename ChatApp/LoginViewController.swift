@@ -43,10 +43,12 @@ class LoginViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if let validError = error {
-                //showError
-                print("ERROR")
+                self.showAlert(withTitle: "Error", message: validError.localizedDescription)
             }
             if user != nil {
+                self.emailTextField.text = ""
+                self.passwordTextField.text = ""
+                
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
                 
                 self.present(vc, animated: true, completion: nil)

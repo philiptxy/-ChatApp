@@ -18,6 +18,7 @@
 		FCE937E6202C40C60074DF37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCE937E4202C40C60074DF37 /* LaunchScreen.storyboard */; };
 		FCE937F4202D98550074DF37 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE937F3202D98550074DF37 /* ContactsViewController.swift */; };
 		FCE937F6202D98640074DF37 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE937F5202D98640074DF37 /* ChatViewController.swift */; };
+		FCE937F8202EE1BB0074DF37 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE937F7202EE1BB0074DF37 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		FCE937E7202C40C60074DF37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCE937F3202D98550074DF37 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		FCE937F5202D98640074DF37 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		FCE937F7202EE1BB0074DF37 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				FCE937DB202C40C60074DF37 /* AppDelegate.swift */,
 				FCE937DD202C40C60074DF37 /* LoginViewController.swift */,
 				FCE937F3202D98550074DF37 /* ContactsViewController.swift */,
+				FCE937F7202EE1BB0074DF37 /* User.swift */,
 				FCE937F5202D98640074DF37 /* ChatViewController.swift */,
 				FCE937E2202C40C60074DF37 /* Assets.xcassets */,
 				FCE937E4202C40C60074DF37 /* LaunchScreen.storyboard */,
@@ -245,6 +248,7 @@
 				FCE937DE202C40C60074DF37 /* LoginViewController.swift in Sources */,
 				FCE937F6202D98640074DF37 /* ChatViewController.swift in Sources */,
 				FCE937DC202C40C60074DF37 /* AppDelegate.swift in Sources */,
+				FCE937F8202EE1BB0074DF37 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
