@@ -33,6 +33,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
+        observeChat()
     }
     
     func observeChat() {
@@ -71,8 +72,7 @@ extension ChatViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = chats[indexPath.row].email
-        cell.detailTextLabel?.text = chats[indexPath.row].msg
+        cell.textLabel?.text = chats[indexPath.row].msg
         
         return cell
     }
