@@ -8,9 +8,15 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class ContactsViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.dataSource = self
+            tableView.delegate = self
+        }
+    }
     
     @IBOutlet weak var logOutButton: UIBarButtonItem! {
         didSet {
@@ -19,16 +25,39 @@ class ContactsViewController: UIViewController {
         }
     }
     
-   
     
+    var ref : DatabaseReference!
+    var contacts : [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-
+        ref = Database.database().reference()
+        
+        observeFireBase()
+        
     }
-
+    
+    func observeFireBase() {
+        ref.child("users").observe(.childAdded) { (snapshot) in
+            
+            guard let userDict = snapshot.value as? [String : Any] else {return}
+            
+            let contact = User(uid: snapshot.key, userDict: userDict)
+            
+            DispatchQueue.main.async {
+                self.contacts.append(contact)
+                let indexPath = IndexPath(row: self.contacts.count - 1, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+            
+            //print(snapshot)
+        }
+        
+        
+        
+    }
+    
     @objc func logOutButtonTapped() {
         do{
             try Auth.auth().signOut()
@@ -37,6 +66,35 @@ class ContactsViewController: UIViewController {
             
         }
     }
-
-
 }
+
+extension ContactsViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contacts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.text = contacts[indexPath.row].username
+        return cell
+    }
+}
+
+extension ContactsViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //let selectedContact = contacts[indexPath.row]
+        
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else {return}
+        //vc.selectedContact = selectedContact
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+
+
+
+
+
