@@ -74,7 +74,7 @@ class SignUpViewController: UIViewController {
                     
                     self.navigationController?.popViewController(animated: false)
                     
-                    self.present(navVC, animated: true, completion: nil)
+                    self.present(navVC, animated: false, completion: nil)
                 }
                 
                 
