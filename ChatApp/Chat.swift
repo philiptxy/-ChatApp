@@ -10,18 +10,18 @@ import Foundation
 
 class Chat {
     var uid : String = ""
-    var email : String = ""
-    var username : String = ""
-    var msg : String = ""
-    var timestamp : Double = 0
+    var from : String = ""
+  //  var username : String = ""
+    var text : String = ""
+    var timeStamp : Double = 0
     
     init(uid: String, dict: [String : Any]) {
         
         self.uid = uid
-        email = dict["email"] as? String ?? "No Email"
-        username = dict["username"] as? String ?? "No Username"
-        msg = dict["msg"] as? String ?? "No Message"
-        timestamp = dict["timestamp"] as? Double ?? 0
+        from = dict["from"] as? String ?? "No Email"
+      //  username = dict["username"] as? String ?? "No Username"
+        text = dict["text"] as? String ?? "No Message"
+        timeStamp = dict["timeStamp"] as? Double ?? 0
 
     }
     
