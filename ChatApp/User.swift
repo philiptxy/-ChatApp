@@ -12,11 +12,13 @@ class User {
     var uid : String = ""
     var email : String = ""
     var username : String = ""
+    var imageURL : String = ""
     
     init(uid: String, userDict: [String : Any]){
         self.uid = uid
         self.email = userDict["email"] as? String ?? "No email"
         self.username = userDict["username"] as? String ?? "No username"
+        self.imageURL = userDict["profilePicURL"] as? String ?? "No URL"
     }
     
 }
