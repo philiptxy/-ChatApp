@@ -43,12 +43,14 @@ class ContactsViewController: UIViewController {
             
             guard let userDict = snapshot.value as? [String : Any] else {return}
             
-            let contact = User(uid: snapshot.key, userDict: userDict)
-            
-            DispatchQueue.main.async {
-                self.contacts.append(contact)
-                let indexPath = IndexPath(row: self.contacts.count - 1, section: 0)
-                self.tableView.insertRows(at: [indexPath], with: .automatic)
+            if userDict["email"] as? String != Auth.auth().currentUser?.email {
+                let contact = User(uid: snapshot.key, userDict: userDict)
+                
+                DispatchQueue.main.async {
+                    self.contacts.append(contact)
+                    let indexPath = IndexPath(row: self.contacts.count - 1, section: 0)
+                    self.tableView.insertRows(at: [indexPath], with: .automatic)
+                }
             }
             
             //print(snapshot)
