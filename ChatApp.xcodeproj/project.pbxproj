@@ -12,6 +12,9 @@
 		00760F6B202DBD7A005B8949 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00760F6A202DBD7A005B8949 /* Chat.swift */; };
 		00760F6D20318E12005B8949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00760F6C20318E12005B8949 /* Assets.xcassets */; };
 		00760F6F2031947A005B8949 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00760F6E2031947A005B8949 /* ContactsTableViewCell.swift */; };
+		00760F712031A2AA005B8949 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00760F702031A2AA005B8949 /* Bolts.framework */; };
+		00760F732031A2C2005B8949 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00760F722031A2C2005B8949 /* FBSDKCoreKit.framework */; };
+		00760F752031A2CD005B8949 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00760F742031A2CD005B8949 /* FBSDKLoginKit.framework */; };
 		00A61E9C202D40B70096E27C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A61E9B202D40B60096E27C /* GoogleService-Info.plist */; };
 		0B02534C5A5A145F899A5C85 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347BC56EBD0081FD2251C0E1 /* Pods_ChatApp.framework */; };
 		FCE937DC202C40C60074DF37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE937DB202C40C60074DF37 /* AppDelegate.swift */; };
@@ -29,6 +32,9 @@
 		00760F6A202DBD7A005B8949 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		00760F6C20318E12005B8949 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00760F6E2031947A005B8949 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		00760F702031A2AA005B8949 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		00760F722031A2C2005B8949 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		00760F742031A2CD005B8949 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		00A61E9B202D40B60096E27C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22D409466F9B4C90BDD30C0F /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		347BC56EBD0081FD2251C0E1 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +56,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B02534C5A5A145F899A5C85 /* Pods_ChatApp.framework in Frameworks */,
+				00760F732031A2C2005B8949 /* FBSDKCoreKit.framework in Frameworks */,
+				00760F752031A2CD005B8949 /* FBSDKLoginKit.framework in Frameworks */,
+				00760F712031A2AA005B8949 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +77,9 @@
 		C116239731D4E40375E2E666 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00760F742031A2CD005B8949 /* FBSDKLoginKit.framework */,
+				00760F722031A2C2005B8949 /* FBSDKCoreKit.framework */,
+				00760F702031A2AA005B8949 /* Bolts.framework */,
 				347BC56EBD0081FD2251C0E1 /* Pods_ChatApp.framework */,
 			);
 			name = Frameworks;
@@ -395,6 +407,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ChatApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = philipteow.ChatApp;
@@ -410,6 +426,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ChatApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = philipteow.ChatApp;
