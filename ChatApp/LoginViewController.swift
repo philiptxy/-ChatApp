@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -32,6 +34,21 @@ class LoginViewController: UIViewController {
             
             present(vc, animated: true, completion: nil)
            
+        }
+        
+        //Facebook Login Button
+        let loginButton = FBSDKLoginButton()
+        let centerX = view.center.x
+        let centerY = view.center.y + 100
+        loginButton.center = CGPoint(x: centerX, y: centerY)
+        view.addSubview(loginButton)
+        loginButton.readPermissions = ["public_profile", "email"]
+        
+        //Check for existing token if they have already logged in with facebook before
+        if FBSDKAccessToken.current() != nil {
+            guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "navigationController") as? UINavigationController else {return}
+            
+            self.present(vc, animated: true, completion: nil)
         }
         
     }
