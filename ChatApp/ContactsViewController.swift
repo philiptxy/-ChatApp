@@ -136,11 +136,12 @@ extension ContactsViewController : UITableViewDataSource {
 
 extension ContactsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let selectedContact = contacts[indexPath.row]
+        let selectedContact = contacts[indexPath.row]
         
         
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else {return}
-        //vc.selectedContact = selectedContact
+        vc.selectedContact = selectedContact
+        
         
         navigationController?.pushViewController(vc, animated: true)
     }
