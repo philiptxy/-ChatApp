@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import FBSDKLoginKit
 
 class ContactsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
@@ -85,7 +86,8 @@ class ContactsViewController: UIViewController {
             try Auth.auth().signOut()
             dismiss(animated: true, completion: nil)
         } catch {
-            
+            FBSDKLoginManager().logOut()
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
