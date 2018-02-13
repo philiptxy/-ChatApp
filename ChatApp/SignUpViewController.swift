@@ -9,9 +9,19 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
-
+import FirebaseStorage
 
 class SignUpViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(tap)
+            
+        }
+    }
+    
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -30,6 +40,9 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Placeholder Image
+//        imageView.image = UIImage(named: "insertphotohere")
+        
         ref = Database.database().reference()
         
         if logoutChecker == true {
@@ -42,8 +55,8 @@ class SignUpViewController: UIViewController {
     //Function to Sign Up New User
     @objc func signUpUser() {
         guard let username = usernameTextField.text,
-        let email = emailTextField.text,
-        let password = passwordTextField.text,
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
             let confirmPassword = confirmPasswordTextField.text else {return}
         
         //Input Validation
@@ -66,6 +79,11 @@ class SignUpViewController: UIViewController {
                 
                 //Successful Creation of New User
                 if let validUser = user {
+                    
+                    if let image = self.imageView.image {
+                        self.uploadToStorage(image)
+                    }
+                    
                     let newUser : [String : Any] = ["email" : email, "username" : username]
                     
                     self.ref.child("users").child(validUser.uid).setValue(newUser)
@@ -76,24 +94,53 @@ class SignUpViewController: UIViewController {
                     
                     self.present(navVC, animated: false, completion: nil)
                 }
-                
-                
-                
             })
+        }
+    }
+    
+    @objc func imageViewTapped() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func uploadToStorage(_ image: UIImage) {
+        let storageRef = Storage.storage().reference()
+        
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpeg"
+        
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        storageRef.child(uid).child("profilePic").putData(imageData, metadata: metaData) { (meta, error) in
             
+            if let validError = error {
+                print(validError.localizedDescription)
+            }
             
-            
-            
-            
-            
+            if let downloadURL = meta?.downloadURL()?.absoluteString {
+                self.ref.child("users").child(uid).child("profilePicURL").setValue(downloadURL)
+            }
+        }
+    }
+    
+}
+
+extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        defer {
+            dismiss(animated: true, completion: nil)
         }
         
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
         
-        
-        
+        imageView.image = image
         
     }
-
-
-
+    
 }

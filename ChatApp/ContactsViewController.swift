@@ -9,12 +9,14 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class ContactsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+            tableView.rowHeight = 69
         }
     }
     
@@ -23,8 +25,7 @@ class ContactsViewController: UIViewController {
             logOutButton.target = self
             logOutButton.action = #selector(logOutButtonTapped)
         }
-    }
-    
+    }    
     
     var ref : DatabaseReference!
     var contacts : [User] = []
@@ -39,6 +40,8 @@ class ContactsViewController: UIViewController {
     }
     
     func observeFireBase() {
+        
+        //CHILD ADDED
         ref.child("users").observe(.childAdded) { (snapshot) in
             
             guard let userDict = snapshot.value as? [String : Any] else {return}
@@ -57,7 +60,24 @@ class ContactsViewController: UIViewController {
         }
         
         
-        
+        //CHILD CHANGED
+        ref.child("users").observe(.childChanged) { (snapshot) in
+            
+            guard let dict = snapshot.value as? [String:Any] else {return}
+            
+            
+            for (index, item) in self.contacts.enumerated() {
+                if item.uid == snapshot.key {
+                    self.contacts[index] = User(uid: snapshot.key, userDict: dict)
+                    
+                    DispatchQueue.main.async {
+                        let indexPath = IndexPath(row: index, section: 0)
+                        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            }
+            //print(snapshot.key)
+        }
     }
     
     @objc func logOutButtonTapped() {
@@ -68,6 +88,27 @@ class ContactsViewController: UIViewController {
             
         }
     }
+    
+    func getImage(_ urlString: String, _ imageView: UIImageView) {
+        guard let url = URL.init(string: urlString) else {return}
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let validError = error {
+                print(validError.localizedDescription)
+            }
+            
+            if let validData = data {
+                let profileImage = UIImage(data: validData)
+                
+                DispatchQueue.main.async {
+                    imageView.image = profileImage
+                }
+            }
+        }
+        task.resume()
+    }
 }
 
 extension ContactsViewController : UITableViewDataSource {
@@ -76,9 +117,17 @@ extension ContactsViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = contacts[indexPath.row].username
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ContactsTableViewCell else {return UITableViewCell()}
+        
+        if let imageViewForCell = cell.profileImageView {
+            
+            cell.nameLabel.text = contacts[indexPath.row].username
+            
+            let picURL = contacts[indexPath.row].imageURL
+            
+            getImage(picURL, imageViewForCell)
+        }
         return cell
     }
 }
