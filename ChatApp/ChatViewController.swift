@@ -128,22 +128,9 @@ class ChatViewController: UIViewController {
         
         let messageIdPlaceholder : [String : Any] = ["text" : inputText, "from" : currentEmail, "timeStamp" : currentTimeInt]
         
-        //let messages : [String : Any] = [currentMessage.key : messageIdPlaceholder]
-        
-        
-        
-        
-        
-        //        let chatIdPlaceholder : [String : Any] = [currentChat.key : messages]
-        
-        
-        
-        //let chatUID = ref.child("chat").childByAutoId()
-        //something.key
-        
-        
-        
         ref.child("chat").child(currentChat).child("messages").child(currentMessage.key).setValue(messageIdPlaceholder)
+        
+        msgTextField.text = ""
         
     }
     
