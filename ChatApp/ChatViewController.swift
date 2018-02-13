@@ -10,11 +10,16 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+
 class ChatViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            tableView.delegate = self
+            tableView.separatorStyle = .none
+            
+            
         }
     }
     
@@ -36,41 +41,88 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         
+        
+        
         createChat()
-        observeChat()
+        tableView.reloadData()
+//        DispatchQueue.main.async {
+//            let indexPath = IndexPath(row: self.chats.count-1, section: 0)
+//            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+//        }
+//        let bottom = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.height)
+//        tableView.setContentOffset(bottom, animated: true)
+
     }
     
     func createChat() {
-        ref.child("chats").observeSingleEvent(of: .value) { (snapshot) in
-            self.combos.append(snapshot.key)
-        }
-        
-        
-        guard let currentUID = Auth.auth().currentUser?.uid,
-            let selectedUID = selectedContact?.uid else {return}
-        guard let selectedEmail = selectedContact?.email else {return}
-        guard let currentEmail = Auth.auth().currentUser?.email else {return}
-        
-        let combo = currentUID + selectedUID
-        let comboInvert = selectedUID + currentUID
-        
-        //CHECKS IF THE CHAT HAS ALREADY BEEN CREATED, IF YES, RETURN, IF NO, CREATE NEW CHAT
-        for each in combos {
-            if each == combo || each == comboInvert {
-                currentChat = each
-                return
+        ref.child("chat").observeSingleEvent(of: .value) { (snapshot) in
+            
+            for (k,_) in snapshot.value as? [String:Any] ?? [:] {
+                self.combos.append(k)
             }
+            
+            DispatchQueue.main.async {
+                guard let currentUID = Auth.auth().currentUser?.uid,
+                    let selectedUID = self.selectedContact?.uid else {return}
+                guard let selectedEmail = self.selectedContact?.email else {return}
+                guard let currentEmail = Auth.auth().currentUser?.email else {return}
+                
+                let combo = currentUID + selectedUID
+                let comboInvert = selectedUID + currentUID
+                
+                //CHECKS IF THE CHAT HAS ALREADY BEEN CREATED, IF YES, RETURN, IF NO, CREATE NEW CHAT
+                for each in self.combos {
+                    if each == combo || each == comboInvert {
+                        self.currentChat = each
+                        self.observeChat()
+                        return
+                    }
+                }
+                
+                //combos.append(combo)
+                
+                self.currentChat = combo
+                
+                self.ref.child("chat").child(self.currentChat)
+                
+                let participants : [String : String] = ["email1" : currentEmail, "email2" : selectedEmail]
+                
+                self.self.ref.child("chat").child(self.currentChat).child("participants").setValue(participants)
+                
+                self.observeChat()
+
+            }
+            
         }
         
-        //combos.append(combo)
+//        DispatchQueue.main.async {
+//            guard let currentUID = Auth.auth().currentUser?.uid,
+//                let selectedUID = self.selectedContact?.uid else {return}
+//            guard let selectedEmail = self.selectedContact?.email else {return}
+//            guard let currentEmail = Auth.auth().currentUser?.email else {return}
+//
+//            let combo = currentUID + selectedUID
+//            let comboInvert = selectedUID + currentUID
+//
+//            //CHECKS IF THE CHAT HAS ALREADY BEEN CREATED, IF YES, RETURN, IF NO, CREATE NEW CHAT
+//            for each in self.combos {
+//                if each == combo || each == comboInvert {
+//                    self.currentChat = each
+//                    return
+//                }
+//            }
+//
+//            //combos.append(combo)
+//
+//            self.currentChat = combo
+//
+//            self.ref.child("chat").child(self.currentChat)
+//
+//            let participants : [String : String] = ["email1" : currentEmail, "email2" : selectedEmail]
+//
+//            self.ref.child("chat").child(self.currentChat).child("participants").setValue(participants)
+//        }
         
-        currentChat = combo
-        
-        ref.child("chat").child(currentChat)
-        
-        let participants : [String : String] = ["email1" : currentEmail, "email2" : selectedEmail]
-        
-        ref.child("chat").child(currentChat).child("participants").setValue(participants)
         
         
         
@@ -87,7 +139,13 @@ class ChatViewController: UIViewController {
                 self.chats.append(message)
                 let indexPath = IndexPath(row: self.chats.count - 1, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
+                
+                self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                
+//                let bottom = CGPoint(x: 0, y: self.tableView.contentSize.height)
+//                self.tableView.setContentOffset(bottom, animated: true)
             }
+            
             
         }
     }
@@ -143,11 +201,66 @@ extension ChatViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ChatTableViewCell else {return UITableViewCell()}
         
-        cell.textLabel?.text = chats[indexPath.row].text
+//        if chats[indexPath.row].text.count < 30 {
+//            tableView.rowHeight = 20.5
+//        } else if chats[indexPath.row].text.count < 60 {
+//            tableView.rowHeight = 41
+//        } else {
+//            tableView.rowHeight = 61.5
+//        }
+//
+//        var height : CGFloat = 41
+        
+        cell.selectionStyle = .none
+        
+        let size: CGSize = chats[indexPath.row].text.size(withAttributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
+        if size.width > 270 {
+            if chats[indexPath.row].from == selectedContact?.email {
+                cell.widthLeftLabel.constant = 300.0
+            } else {
+                cell.widthRightLabel.constant = 300.0
+            }
+        } else {
+            if chats[indexPath.row].from == selectedContact?.email {
+                cell.widthLeftLabel.constant = size.width + 50.0
+            } else {
+                cell.widthRightLabel.constant = size.width + 50.0
+            }
+        }
+        
+        view.layoutIfNeeded()
+
+        
+        
+        
+        if chats[indexPath.row].from == selectedContact?.email {
+            cell.leftMsgLabel.text = chats[indexPath.row].text
+            cell.rightMsgLabel.text = ""
+        } else {
+            cell.rightMsgLabel.text = chats[indexPath.row].text
+            cell.leftMsgLabel.text = ""
+
+        }
+        
+       // guard let position = UITableViewScrollPosition(rawValue: indexPath.row) else {return UITableViewCell()}
         
         return cell
+    }
+}
+
+extension ChatViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let size: CGSize = chats[indexPath.row].text.size(withAttributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
+        
+        if size.width < 270 {
+            return 30
+        } else if size.width < 540 {
+            return 60
+        } else {
+            return 90
+        }
     }
 }
 
