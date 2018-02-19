@@ -247,20 +247,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0B-L9-NlI">
-                                                    <rect key="frame" x="15" y="60" width="300" height="21"/>
+                                                    <rect key="frame" x="15" y="60" width="42" height="21"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.11855201198630137" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="EbP-P8-UOS"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="EbP-P8-UOS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPe-bd-FSM">
-                                                    <rect key="frame" x="60" y="61" width="300" height="20.5"/>
+                                                    <rect key="frame" x="318" y="60.5" width="42" height="20.5"/>
                                                     <color key="backgroundColor" red="0.78102917539047312" green="0.97157033193343567" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="R5H-Hh-f2m"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="R5H-Hh-f2m"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>

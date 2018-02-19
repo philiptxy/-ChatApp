@@ -216,21 +216,24 @@ extension ChatViewController : UITableViewDataSource {
         cell.selectionStyle = .none
         
         let size: CGSize = chats[indexPath.row].text.size(withAttributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
-        if size.width > 270 {
-            if chats[indexPath.row].from == selectedContact?.email {
-                cell.widthLeftLabel.constant = 300.0
-            } else {
-                cell.widthRightLabel.constant = 300.0
-            }
-        } else {
-            if chats[indexPath.row].from == selectedContact?.email {
-                cell.widthLeftLabel.constant = size.width + 50.0
-            } else {
-                cell.widthRightLabel.constant = size.width + 50.0
-            }
-        }
         
-        view.layoutIfNeeded()
+        
+        
+//        if size.width > 270 {
+//            if chats[indexPath.row].from == selectedContact?.email {
+//                cell.widthLeftLabel.constant = 300.0
+//            } else {
+//                cell.widthRightLabel.constant = 300.0
+//            }
+//        } else {
+//            if chats[indexPath.row].from == selectedContact?.email {
+//                cell.widthLeftLabel.constant = size.width + 50.0
+//            } else {
+//                cell.widthRightLabel.constant = size.width + 50.0
+//            }
+//        }
+//        
+//        view.layoutIfNeeded()
 
         
         
@@ -244,8 +247,13 @@ extension ChatViewController : UITableViewDataSource {
 
         }
         
-       // guard let position = UITableViewScrollPosition(rawValue: indexPath.row) else {return UITableViewCell()}
+//        cell.widthRightLabel.constant = 300.0
+//        cell.widthLeftLabel.constant = 300.0
         
+        
+       // guard let position = UITableViewScrollPosition(rawValue: indexPath.row) else {return UITableViewCell()}
+//        cell.heightRightLabel.constant += 40.0
+//        view.layoutIfNeeded()
         return cell
     }
 }
@@ -254,13 +262,19 @@ extension ChatViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let size: CGSize = chats[indexPath.row].text.size(withAttributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
         
-        if size.width < 270 {
-            return 30
-        } else if size.width < 540 {
-            return 60
-        } else {
-            return 90
-        }
+        var x = 1
+        
+        repeat {
+            if size.width < CGFloat(270 * x) {
+                return CGFloat(30 * x)
+            }
+            x += 1
+        } while true
+        
+        
+        
+        
+        
     }
 }
 
