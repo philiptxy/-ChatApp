@@ -57,7 +57,7 @@ class ContactsViewController: UIViewController {
                 }
             }
             
-            //print(snapshot)
+            print(snapshot)
         }
         
         
@@ -77,7 +77,7 @@ class ContactsViewController: UIViewController {
                     }
                 }
             }
-            //print(snapshot.key)
+            print(snapshot.key)
         }
     }
     
